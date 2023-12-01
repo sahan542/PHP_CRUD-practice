@@ -11,9 +11,8 @@ if ( isset($_GET["id"])) {
     $connection = new mysqli($servername, $username, $password, $database);
 
     $sql = "DELETE FROM clients WHERE id=$id";
-    $result = $connection->query($sql);
+     $result = $connection->query($sql);
     $connection->query($sql);
-    
     if ($result) {
         $successMessage = "Deleted Successfully";
         header("location: /PHP CRUD/index.php");
