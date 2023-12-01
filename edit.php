@@ -50,37 +50,28 @@ else {
     $phone =$_POST["phone"];
     $address =$_POST["address"];
 
-    do{
-        if ( empty($name) || empty($email) || empty($phone) || empty($address)){
+    do {
+        if (empty($name) || empty($email) || empty($phone) || empty($address)) {
             $errorMessage = "All the fields are required";
             break;
         }
-        $sql = "UPDATE clients ".
-        "SET name = '$name', email = '$email', phone = '$phone', address = '$address' ".
-        "WHERE id = $id";
-
-    $result = $connection->query($sql);
-
-    if (!empty($successMessage)) {
-        echo "
-            <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                <strong>$successMessage</strong>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>
-        ";
-    }
-
-    if(!$row){
-        $successMessage = "Updated Successfully";
-        header("location: /PHP CRUD/index.php");
-        exit;
-    }
-
-
-    }
     
-    while(false);
+        $sql = "UPDATE clients " .
+            "SET name = '$name', email = '$email', phone = '$phone', address = '$address' " .
+            "WHERE id = $id";
+    
+        $result = $connection->query($sql);
+    
+        if (!$result) {
+            $errorMessage = "Invalid query: " . $connection->error;
+            break;
+        }
+    
+        // Set the success message
+        $successMessage = "Updated Successfully";
 
+    
+    } while (false);
 }
 
 
@@ -102,17 +93,23 @@ else {
         <h2>Edit Client</h2>
 
         <?php
-            if( !empty($errorMessage)){
-                echo "
-                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        <strong>$errorMessage</strong>
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>
-                
-                ";
+        if (!empty($errorMessage)) {
+            echo "
+                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>$errorMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            ";
+        }
 
-            }
-
+        else {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    <strong>$successMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            ";
+        }
         ?>
 
         <form method='post'>
@@ -142,18 +139,7 @@ else {
             </div>
             </div>
 
-            <?php
-            if (!empty($successMessage)) {
-                echo "
-                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        <strong>$errorMessage</strong>
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    
-                    </div>
-                
-                ";
-            }
-            ?>
+            
 
             <div class='row mb-3'>
                 <div class='offset-sm-3 col-sm-3 d-grid'>
@@ -170,4 +156,5 @@ else {
     
 </body>
 </html>
+
 

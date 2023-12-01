@@ -71,18 +71,23 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
         <h2>New Client</h2>
 
         <?php
-            if( !empty($errorMessage)){
-                echo "
-                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        <strong>$errorMessage</strong>
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    
-                    </div>
-                
-                ";
+        if (!empty($errorMessage)) {
+            echo "
+                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>$errorMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            ";
+        }
 
-            }
-
+        else {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    <strong>$successMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            ";
+        }
         ?>
 
         <form method='post'>
@@ -112,7 +117,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
 
             <?php
-            if (!empty($successMessage)) {
+            if (!empty($errorMessage)) {
                 echo "
                     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                         <strong>$errorMessage</strong>

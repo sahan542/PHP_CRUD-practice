@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container my-5">
+    <div class='container my-5'>
         <h2>List of Clients</h2>
         <a class="btn btn-primary" href="./create.php" role="button">New Client</a>
         <br>
